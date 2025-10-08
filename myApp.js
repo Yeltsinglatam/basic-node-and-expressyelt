@@ -69,13 +69,13 @@ app.use("/public", express.static(__dirname + "/public"));
 //   );
 //   }
 // });
-
-app.get("/json", (req, res) => {
-  var jsonResponse = { message: "Hello json" };
+app.use("/json", (req, res) => {
+  let response = "Hello json";
   if (process.env.MESSAGE_STYLE === "uppercase") {
-    jsonResponse.message = jsonResponse.message.toUpperCase();
+    return res.json({ message: response.toUpperCase() });
+  } else {
+    return res.json({ message: response });
   }
-  res.json(jsonResponse);
 });
 
 module.exports = app;
